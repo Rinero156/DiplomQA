@@ -1,10 +1,10 @@
-package Tests;
+package tests;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
-import Data.Data;
-import Data.SQL;
-import Pages.Start;
-import Pages.Credit;
+import data.Data;
+import data.SQL;
+import pages.Start;
+import pages.Credit;
 import com.codeborne.selenide.logevents.SelenideLogger;
 
 import static com.codeborne.selenide.Selenide.open;

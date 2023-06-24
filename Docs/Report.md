@@ -9,8 +9,8 @@
 - PostgreSQL
 
 Всего составлено 38 тестов, из них:
-- Успешных - 23 (60.52)
-- Неуспешных - 15 (39.48)
+- Успешных - 26 (68.42)
+- Неуспешных - 12 (31.58)
 - Проигнорировано: 0
 
 #### Отчет по результатам тестирования Gradle:
@@ -26,10 +26,10 @@
 ![Allure.jpg](Allure.jpg)
 
 Отчёт Suites. CreditPage:
-![AllureCredit.jpg](AllureCredit.jpg)
+![AllureCreditTests.jpg](AllureCreditTests.jpg)
 
 Отчёт Suites. PaymentTest:
-![AllureOrder.jpg](AllureOrder.jpg)
+![AllureOrderTests.jpg](AllureOrderTests.jpg)
 
 ### Общие рекомендации
 

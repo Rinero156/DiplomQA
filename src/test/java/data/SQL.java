@@ -1,4 +1,4 @@
-package Data;
+package data;
 
 import lombok.val;
 import org.apache.commons.dbutils.QueryRunner;

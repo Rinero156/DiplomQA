@@ -1,4 +1,4 @@
-package Data;
+package data;
 
 import com.github.javafaker.Faker;
 import lombok.Value;
@@ -6,25 +6,23 @@ import lombok.Value;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import java.lang.Math;
 
 public class Data{
 
     public static CardInfo getApprovedCard() {
-        return new CardInfo("4444444444444441", "08", "23", "Ivan Ivanov", "888");
+        return new CardInfo("4444444444444441", getShiftedMonth(2), getShiftedYear(0), generateValidHolder(), generateValidCVC());
     }
 
     public static CardInfo getDeclinedCard() {
-        return new CardInfo("4444444444444442", "09", "24", "Ivan Ivanov", "777");
+        return new CardInfo("4444444444444442", getShiftedMonth(3), getShiftedYear(1), generateValidHolder(), generateValidCVC());
     }
 
     public static CardInfo getEmptyCard() {
         return new CardInfo("", "", "", "", "");
     }
 
-    public static String getShiftedMonth(){
-        int shift = (int) (Math.random() * 10);
-        return LocalDate.now().plusMonths(shift).format(DateTimeFormatter.ofPattern("MM"));
+    public static String getShiftedMonth(int monthCount) {
+        return LocalDate.now().plusMonths(monthCount).format(DateTimeFormatter.ofPattern("MM"));
     }
 
     public static String getShiftedYear(int yearCount){
@@ -34,7 +32,7 @@ public class Data{
     public static CardInfo getNumberCard15Symbols() {
         Faker faker = new Faker();
         String holder = faker.name().firstName() + " " + faker.name().lastName();
-        String month = getShiftedMonth();
+        String month = getShiftedMonth(1);
         String year = getShiftedYear(1);
         String cvv = faker.number().digits(3);
         String number = faker.number().digits(15);
@@ -44,7 +42,7 @@ public class Data{
     public static CardInfo getCardNotInDatabase() {
         Faker faker = new Faker();
         String holder = faker.name().firstName() + " " + faker.name().lastName();
-        String month = getShiftedMonth();
+        String month = getShiftedMonth(1);
         String year = getShiftedYear(1);
         String cvv = faker.number().digits(3);
         return new CardInfo("1444444444444444", month, year, holder, cvv);
@@ -86,7 +84,7 @@ public class Data{
     public static CardInfo getCardYear1Symbol() {
         Faker faker = new Faker();
         String holder = faker.name().firstName() + " " + faker.name().lastName();
-        String month = getShiftedMonth();
+        String month = getShiftedMonth(1);
         String year = faker.number().digit();
         String cvv = faker.number().digits(3);
         return new CardInfo("4444444444444441", month, year, holder, cvv);
@@ -95,7 +93,7 @@ public class Data{
     public static CardInfo getCardYearOverThisYearOn6() {
         Faker faker = new Faker();
         String holder = faker.name().firstName() + " " + faker.name().lastName();
-        String month = getShiftedMonth();
+        String month = getShiftedMonth(1);
         String year = getShiftedYear(6);
         String cvv = faker.number().digits(3);
         return new CardInfo("4444444444444441", month, year, holder, cvv);
@@ -104,7 +102,7 @@ public class Data{
     public static CardInfo getCardYearUnderThisYear() {
         Faker faker = new Faker();
         String holder = faker.name().firstName() + " " + faker.name().lastName();
-        String month = getShiftedMonth();
+        String month = getShiftedMonth(1);
         String year = getShiftedYear(-1);
         String cvv = faker.number().digits(3);
         return new CardInfo("4444444444444441", month, year, holder, cvv);
@@ -113,7 +111,7 @@ public class Data{
     public static CardInfo getCardYear00() {
         Faker faker = new Faker();
         String holder = faker.name().firstName() + " " + faker.name().lastName();
-        String month = getShiftedMonth();
+        String month = getShiftedMonth(1);
         String cvv = faker.number().digits(3);
         return new CardInfo("4444444444444441", month, "00", holder, cvv);
     }
@@ -121,7 +119,7 @@ public class Data{
     public static CardInfo getCardCvv1Symbol() {
         Faker faker = new Faker();
         String holder = faker.name().firstName() + " " + faker.name().lastName();
-        String month = getShiftedMonth();
+        String month = getShiftedMonth(1);
         String year = getShiftedYear(1);
         String cvv = faker.number().digits(1);
         return new CardInfo("4444444444444441", month, year, holder, cvv);
@@ -130,7 +128,7 @@ public class Data{
     public static CardInfo getCardCvv2Symbols() {
         Faker faker = new Faker();
         String holder = faker.name().firstName() + " " + faker.name().lastName();
-        String month = getShiftedMonth();
+        String month = getShiftedMonth(1);
         String year = getShiftedYear(1);
         String cvv = faker.number().digits(2);
         return new CardInfo("4444444444444441", month, year, holder, cvv);
@@ -139,7 +137,7 @@ public class Data{
     public static CardInfo getCardHolder1Word() {
         Faker faker = new Faker();
         String holder = faker.name().firstName();
-        String month = getShiftedMonth();
+        String month = getShiftedMonth(1);
         String year = getShiftedYear(1);
         String cvv = faker.number().digits(3);
         return new CardInfo("4444444444444441", month, year, holder, cvv);
@@ -148,7 +146,7 @@ public class Data{
     public static CardInfo getCardHolderCirillic() {
         Faker faker = new Faker(new Locale("ru"));
         String holder = faker.name().firstName() + " " + faker.name().lastName();
-        String month = getShiftedMonth();
+        String month = getShiftedMonth(1);
         String year = getShiftedYear(1);
         String cvv = faker.number().digits(3);
         return new CardInfo("4444444444444441", month, year, holder, cvv);
@@ -157,7 +155,7 @@ public class Data{
     public static CardInfo getCardHolderNumeric() {
         Faker faker = new Faker();
         String holder = faker.name().firstName() + " " + faker.number().digit();
-        String month = getShiftedMonth();
+        String month = getShiftedMonth(1);
         String year = getShiftedYear(1);
         String cvv = faker.number().digits(3);
         return new CardInfo("4444444444444441", month, year, holder, cvv);
@@ -166,10 +164,20 @@ public class Data{
     public static CardInfo getCardSpecialSymbols() {
         Faker faker = new Faker();
         String holder = faker.name().firstName() + " %$ * &";
-        String month = getShiftedMonth();
+        String month = getShiftedMonth(1);
         String year = getShiftedYear(1);
         String cvv = faker.number().digits(3);
         return new CardInfo("4444444444444441", month, year, holder, cvv);
+    }
+
+    public static String generateValidHolder() {
+        Faker faker = new Faker();
+        return faker.name().fullName().toUpperCase();
+    }
+
+    public static String generateValidCVC() {
+        Faker faker = new Faker();
+        return faker.numerify("###");
     }
     @Value
     public static class CardInfo {

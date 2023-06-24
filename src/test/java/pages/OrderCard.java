@@ -1,8 +1,10 @@
-package Pages;
+package pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import Data.Data;
+import data.Data;
+
+import java.time.Duration;
 
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Selenide.$;
@@ -40,11 +42,11 @@ public class OrderCard {
     }
 
     public void waitNotificationApproved() {
-        success.shouldBe(visible);
+        success.shouldBe(visible, Duration.ofSeconds(15));
     }
 
     public void waitNotificationFailure() {
-        error.shouldBe(visible);
+        error.shouldBe(visible, Duration.ofSeconds(15));
     }
 
     public void waitNotificationWrongFormat() {
